@@ -1,0 +1,107 @@
+/* Global Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', Arial, sans-serif; /* Fallback font */
+  background-color: #faf3e0; /* Warm, inviting background */
+  color: #333; /* Default text color */
+}
+
+/* Header */
+.header {
+  background-color: #5a3e2b; /* Dark wood-like color */
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #f8c471; /* Warm gold accent */
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d35400; /* Darker accent on hover */
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 5%;
+  background-color: #212226; /* Neutral background */
+  color: #ecf0f1;
+  background-image: url('path/to/tavern-background.jpg'); /* Add a subtle, tasteful background image */
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: #ecf0f1;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 40px;
+  color: #ecf0f1;
+}
+
+/* Buttons */
+.cta-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Features Section */
+.features {
+  padding: 60px 20px;
+  background-color: #ececec; /* Light background for readability */
+  border-radius: 20px;
+}
+
+.features h2 {
+  font-family: 'Cinzel', serif;
+  color: #5a3e2b;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: 8px; /* Reduced padding */
+  margin-bottom: 12px; /* Reduced margin */
+  border-radius: 8px; /* Slightly smaller border radius */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+.feature-card:hover {
+  transform: translateY(-3px); /* Subtle hover effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Lighter hover shadow */
+}
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #5a3e2b;
+  color: white;
+}
+
+.footer a {
+  color: #f39c12;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
