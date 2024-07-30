@@ -48,7 +48,7 @@ flask run
 
 # Frontend
 cd root
-npm rub dev
+npm run dev
 ```
 
 ## 🛠 Technology Stack
