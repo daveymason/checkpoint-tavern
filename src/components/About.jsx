@@ -19,8 +19,8 @@ function About() {
               24/7.
             </Typography>
             <Typography variant="body1" component="p" paragraph>
-              Whether you need mindfulness exercises, expert advice, or a
-              comforting chat, Checkpoint Tavern is your refuge.
+              Need mindfulness exercises, expert advice, or a
+              comforting chat? Checkpoint Tavern is your refuge.
             </Typography>
           </Box>
         </Grid>

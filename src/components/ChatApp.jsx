@@ -8,35 +8,61 @@ function ChatApp() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const eventSource = useRef(null);
+  const [currentResponse, setCurrentResponse] = useState('');
+  const messagesEndRef = useRef(null); // Ref for scrolling to the bottom
 
   const sendMessage = () => {
     if (message.trim() === '') return;
+
     setMessages(prevMessages => [...prevMessages, { role: 'user', content: message }]);
+    setCurrentResponse(''); // Reset current response
 
     const url = `http://127.0.0.1:5000/chat?message=${encodeURIComponent(message)}`;
-    const eventSource = new EventSource(url);
+    eventSource.current = new EventSource(url);
 
-    eventSource.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      setMessages(prev => [...prev, { role: 'assistant', content: newMessage }]);
+    let accumulatedResponse = ''; // Temporary variable to accumulate chunks to stop AI messages from being split
+
+    eventSource.current.onmessage = (event) => {
+      accumulatedResponse += event.data;
+      setCurrentResponse(accumulatedResponse); 
     };
 
-    eventSource.onerror = (error) => {
+    eventSource.current.onerror = (error) => {
       console.error('EventSource failed:', error);
-      eventSource.close();
+      eventSource.current.close();
+      if (!accumulatedResponse) {
+        setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Could not get a response.' }]);
+      }
+    };
+
+    eventSource.current.onclose = () => {
+      console.log("connection closed");
+      setMessages((prev) => {
+        const lastMessage = prev[prev.length - 1];
+        if (
+          accumulatedResponse &&
+          !(lastMessage && lastMessage.role === "assistant" && lastMessage.content === accumulatedResponse)
+        ) {
+          return [...prev, { role: "assistant", content: accumulatedResponse }];
+        }
+        return prev;
+      });
     };
 
     setMessage('');
-};
-
+  };
 
   useEffect(() => {
     return () => {
       if (eventSource.current) {
-        eventSource.current.close();  // Close EventSource when the component unmounts
+        eventSource.current.close();
       }
     };
   }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div>
@@ -49,7 +75,7 @@ function ChatApp() {
             </Grid>
             <Grid item xs={11}>
               <Typography variant="h4" gutterBottom>
-                What ale's on your mind?
+                What's on your mind?
               </Typography>
             </Grid>
           </Grid>
@@ -59,6 +85,12 @@ function ChatApp() {
                 <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
               </Typography>
             ))}
+            {currentResponse && (
+              <Typography variant="body1" sx={{ mb: 1 }}>
+                <strong>AI:</strong> {currentResponse}
+              </Typography>
+            )}
+            <div ref={messagesEndRef} />
           </Box>
           <Box display="flex">
             <TextField

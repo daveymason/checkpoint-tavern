@@ -6,7 +6,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Initialize the OpenAI client with your API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/chat', methods=['GET'])
