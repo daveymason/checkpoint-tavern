@@ -26,9 +26,12 @@ function ContactForm() {
       <Grid container spacing={2} alignItems="center" justifyContent={"center"} sx={{p:5}}>
       <Grid item xs={12} md={5}>
       <Typography variant="h4" component="h1" gutterBottom>
-        Contact Us
+        Contact 
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <Typography variant='p'>
+  E-mail at <a href="mailto:daveymason@outlook.com">daveymason@outlook.com</a>
+</Typography>
+      {/* <form onSubmit={handleSubmit}>
         <Box mb={2}>
           <TextField
             fullWidth
@@ -65,7 +68,7 @@ function ContactForm() {
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>
-      </form>
+      </form> */}
       </Grid>
       <Grid item xs={5}/>
       </Grid>
