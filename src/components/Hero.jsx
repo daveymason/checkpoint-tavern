@@ -23,13 +23,13 @@ function Hero() {
               of peace, our friendly innkeeper is always here to listen and
               provide support.
             </Typography>
-            <Button
+            {/* <Button
               variant="contained"
               className="cta-button contained"
               href="/chat"
             >
               Chat Now
-            </Button>
+            </Button> */}
           </Box>
         </Grid>
         <Grid item xs={12} md={5}>
