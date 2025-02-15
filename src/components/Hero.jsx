@@ -1,5 +1,5 @@
 import { Button, Container, Grid, Typography, Box } from "@mui/material";
-import heroImage from "../assets/heroImage.png";
+import logo from '../assets/logo.png';
 
 function Hero() {
   return (
@@ -32,15 +32,15 @@ function Hero() {
             </Button> */}
           </Box>
         </Grid>
-        <Grid item xs={12} md={5}>
+         <Grid item xs={12} md={5}>
           <Box sx={{ textAlign: "center" }}>
             <img
-              src={heroImage}
+              src={logo}
               alt="About"
-              style={{ width: "100%", maxWidth: "200px", height: "auto", borderRadius: "50%" }}
+              style={{ width: "100%", maxWidth: "200px", height: "auto", borderRadius: "10px" }}
             />
           </Box>
-        </Grid>
+        </Grid> 
       </Grid>
     </Container>
   );
