@@ -13,6 +13,9 @@ function About() {
              <InfoIcon /> About
             </Typography>
             <Typography variant="body1" component="p" paragraph>
+              Millions struggle with mental health, yet traditional therapy is expensive, inaccessible, or intimidating. Checkpoint Tavern blends the immersive world of gaming with real mental health support—offering a safe, stigma-free space where users can engage at their own pace.
+            </Typography>
+            <Typography variant="body1" component="p" paragraph>
               We blend the warmth of a fantasy tavern with
               cutting-edge mental health support. Our chatbot, trained on professional crisis
               management data, provides empathetic and confidential support
@@ -20,7 +23,10 @@ function About() {
             </Typography>
             <Typography variant="body1" component="p" paragraph>
               Need mindfulness exercises, expert advice, or a
-              comforting chat? Checkpoint Tavern is your refuge.
+              comforting chat? 
+            </Typography>
+            <Typography variant="body1" component="p" paragraph>
+            Checkpoint Tavern is your refuge.
             </Typography>
           </Box>
         </Grid>

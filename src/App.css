@@ -87,6 +87,16 @@ body, html {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Lighter hover shadow */
 }
 
+.contact {
+  padding: 60px 20px;
+  background-color: #fff;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.contact h1 {
+  color: #5a3e2b;
+}
 
 /* Footer */
 .footer {

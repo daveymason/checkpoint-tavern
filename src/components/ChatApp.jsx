@@ -6,59 +6,64 @@ import avatar from '../assets/avatar.png';
 
 function ChatApp() {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-  const eventSource = useRef(null);
-  const [currentResponse, setCurrentResponse] = useState('');
-  const messagesEndRef = useRef(null); // Ref for scrolling to the bottom
+  const [messages, setMessages] = useState([]); // Initialize as an empty array
+  const [inputDisabled, setInputDisabled] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (message.trim() === '') return;
 
     setMessages(prevMessages => [...prevMessages, { role: 'user', content: message }]);
-    setCurrentResponse(''); // Reset current response
+    setMessage('');
+    setInputDisabled(true);
 
     const url = `http://127.0.0.1:5000/chat?message=${encodeURIComponent(message)}`;
-    eventSource.current = new EventSource(url);
 
-    let accumulatedResponse = ''; // Temporary variable to accumulate chunks to stop AI messages from being split
-
-    eventSource.current.onmessage = (event) => {
-      accumulatedResponse += event.data;
-      setCurrentResponse(accumulatedResponse); 
-    };
-
-    eventSource.current.onerror = (error) => {
-      console.error('EventSource failed:', error);
-      eventSource.current.close();
-      if (!accumulatedResponse) {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Could not get a response.' }]);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
-    };
 
-    eventSource.current.onclose = () => {
-      console.log("connection closed");
-      setMessages((prev) => {
-        const lastMessage = prev[prev.length - 1];
-        if (
-          accumulatedResponse &&
-          !(lastMessage && lastMessage.role === "assistant" && lastMessage.content === accumulatedResponse)
-        ) {
-          return [...prev, { role: "assistant", content: accumulatedResponse }];
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let botResponse = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n\n');
+
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.substring('data: '.length);
+            if (data.trim() !== '') {
+              botResponse += data;
+
+              // Simpler and more reliable state update:
+              setMessages(prevMessages => [
+                ...prevMessages.filter(msg => msg.role !== 'assistant'), // Remove previous bot response
+                { role: 'assistant', content: botResponse } // Add updated bot response
+              ]);
+            }
+          } else if (line.startsWith('Error: ')) {
+            const errorMessage = line.substring('Error: '.length);
+            setMessages(prev => [...prev, { role: 'assistant', content: errorMessage }]);
+            console.error("Chatbot Error:", errorMessage);
+          }
         }
-        return prev;
-      });
-    };
-
-    setMessage('');
-  };
-
-  useEffect(() => {
-    return () => {
-      if (eventSource.current) {
-        eventSource.current.close();
       }
-    };
-  }, []);
+
+    } catch (error) {
+      console.error('Fetch failed:', error);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Could not get a response.' }]);
+    } finally {
+      setInputDisabled(false);
+    }
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -80,17 +85,12 @@ function ChatApp() {
             </Grid>
           </Grid>
           <Box sx={{ maxHeight: '300px', overflowY: 'auto', border: '1px solid #ccc', p: 2, mb: 2, borderRadius: 1, backgroundColor: '#f9f9f9' }}>
-            {messages.map((msg, index) => (
+            {messages && messages.map((msg, index) => (  // Correct way to render messages
               <Typography key={index} variant="body1" sx={{ mb: 1 }}>
                 <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
               </Typography>
             ))}
-            {currentResponse && (
-              <Typography variant="body1" sx={{ mb: 1 }}>
-                <strong>AI:</strong> {currentResponse}
-              </Typography>
-            )}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef} />  {/* Ref for scrolling always goes inside the container */}
           </Box>
           <Box display="flex">
             <TextField
@@ -99,10 +99,11 @@ function ChatApp() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type a message..."
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              onKeyPress={(e) => e.key === 'Enter' && !inputDisabled && sendMessage()}
               sx={{ mr: 2 }}
+              disabled={inputDisabled}
             />
-            <Button variant="contained" color="primary" onClick={sendMessage}>
+            <Button variant="contained" color="primary" onClick={sendMessage} disabled={inputDisabled}>
               Send
             </Button>
           </Box>

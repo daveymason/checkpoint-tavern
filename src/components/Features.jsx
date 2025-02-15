@@ -16,7 +16,7 @@ function Features() {
             <Typography variant="h4" component="h2" gutterBottom>
               Features
             </Typography>
-            <Card className="feature-card" sx={{ mb: 2, p: 1 }}>
+            <Card className="feature-card" sx={{ mb: 2, p:2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <ChatIcon fontSize="medium" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="h3">
@@ -27,7 +27,7 @@ function Features() {
                 Our chatbot is trained on crisis management data to provide support 24/7.
               </Typography>
             </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 1 }}>
+            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <BookIcon fontSize="medium" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="h3">
@@ -38,7 +38,7 @@ function Features() {
                 Keep track of your mood and activities to better understand your mental health.
               </Typography>
             </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 1 }}>
+            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <SpaIcon fontSize="medium" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="h3">
@@ -49,7 +49,7 @@ function Features() {
                 Access various exercises designed to help you relax and recharge.
               </Typography>
             </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 1 }}>
+            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <SupportAgentIcon fontSize="medium" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="h3">
@@ -60,7 +60,7 @@ function Features() {
                 Get advice from mental health professionals on various topics.
               </Typography>
             </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 1 }}>
+            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <PeopleIcon fontSize="medium" sx={{ mr: 1 }} />
                 <Typography variant="h6" component="h3">

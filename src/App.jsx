@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Features from './components/Features';
+import USP from './components/USP';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import ChatApp from './components/ChatApp';
@@ -16,6 +17,7 @@ function HomePage() {
       <Hero />
       <About />
       <Features />
+      <USP />
       <ContactForm />
       <Footer />
     </div>

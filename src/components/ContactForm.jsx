@@ -22,8 +22,8 @@ function ContactForm() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 5, mb:5 }}>
-      <Grid container spacing={2} alignItems="center" justifyContent={"center"}>
+    <Container maxWidth="xl" className='contact' sx={{ p:5 }}>
+      <Grid container spacing={2} alignItems="center" justifyContent={"center"} sx={{p:5}}>
       <Grid item xs={12} md={5}>
       <Typography variant="h4" component="h1" gutterBottom>
         Contact Us
