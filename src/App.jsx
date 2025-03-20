@@ -18,7 +18,7 @@ function HomePage() {
       <About />
       <Features />
       <USP />
-      <ContactForm />
+
       <Footer />
     </div>
   );

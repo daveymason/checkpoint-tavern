@@ -1,80 +1,28 @@
-import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Container, Grid } from '@mui/material';
+import React from 'react';
+import { Typography, Container, Grid } from '@mui/material';
 
 function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+    const handleContactClick = () => {
+        const mailtoLink = `mailto:daveymason@outlook.com?subject=Contact Form Submission&body=Name:%0D%0AEmail:%0D%0AMessage:%0D%0A`; // %0D%0A adds new lines
+        window.location.href = mailtoLink;
+    };
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here, such as sending data to a server
-    console.log(formData);
-  };
-
-  return (
-    <Container maxWidth="xl" className='contact' sx={{ p:5 }}>
-      <Grid container spacing={2} alignItems="center" justifyContent={"center"} sx={{p:5}}>
-      <Grid item xs={12} md={5}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Contact 
-      </Typography>
-      <Typography variant='p'>
-  E-mail at <a href="mailto:daveymason@outlook.com">daveymason@outlook.com</a>
-</Typography>
-      {/* <form onSubmit={handleSubmit}>
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            label="Name"
-            name="name"
-            variant="outlined"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </Box>
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            label="Email"
-            name="email"
-            variant="outlined"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </Box>
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            label="Message"
-            name="message"
-            variant="outlined"
-            multiline
-            rows={4}
-            value={formData.message}
-            onChange={handleChange}
-          />
-        </Box>
-        <Button variant="contained" color="primary" type="submit">
-          Submit
-        </Button>
-      </form> */}
-      </Grid>
-      <Grid item xs={5}/>
-      </Grid>
-
-    </Container>
-  );
+    return (
+        <Container maxWidth="xl" className='contact' sx={{ p: 5 }}>
+            <Grid container spacing={2} alignItems="center" justifyContent={"center"} sx={{ p: 5 }}>
+                <Grid item xs={12} md={5}>
+                    <Typography variant="h4" component="h1" gutterBottom>
+                        Contact
+                    </Typography>
+                    <Typography variant='p'>
+                        E-mail at <a href="mailto:daveymason@outlook.com">daveymason@outlook.com</a><br/>
+                        Or click <a href="#" onClick={handleContactClick}>here</a> to use the contact form (opens your email client).
+                    </Typography>
+                </Grid>
+                <Grid item xs={5} />
+            </Grid>
+        </Container>
+    );
 }
 
 export default ContactForm;
