@@ -38,21 +38,42 @@ const theme = createTheme({
   },
   components: {
     MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
       styleOverrides: {
-        root: {
-          borderRadius: 8,
-          transition: 'background-color 0.3s ease, color 0.3s ease',
-        },
+        root: ({ theme }) => ({
+          borderRadius: theme.shape.borderRadius,
+          transition: theme.transitions.create(['background-color','color','transform'], { duration: theme.transitions.duration.short }),
+          '&:hover': {
+            transform: 'translateY(-1px)',
+          },
+        }),
       },
     },
     MuiCard: {
       styleOverrides: {
-        root: {
-          borderRadius: 12,
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-          backgroundColor: '#f9f9f9',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-        },
+        root: ({ theme }) => ({
+          borderRadius: theme.shape.borderRadius,
+          boxShadow: theme.shadows[1],
+          backgroundColor: theme.palette.background.paper,
+          transition: theme.transitions.create(['transform','box-shadow'], { duration: theme.transitions.duration.short }),
+          '&:hover': {
+            transform: 'translateY(-2px)',
+            boxShadow: theme.shadows[4],
+          },
+        }),
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          transition: theme.transitions.create(['background-color','transform'], { duration: theme.transitions.duration.short }),
+          '&:hover': {
+            backgroundColor: theme.palette.action.hover,
+            transform: 'scale(1.1)',
+          },
+        }),
       },
     },
   },

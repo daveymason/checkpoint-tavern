@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Container, Grid } from '@mui/material';
+import { Typography, Container, Grid, Button } from '@mui/material';
 
 function ContactForm() {
     const handleContactClick = () => {
@@ -8,18 +8,30 @@ function ContactForm() {
     };
 
     return (
-        <Container maxWidth="xl" className='contact' sx={{ p: 5 }}>
-            <Grid container spacing={2} alignItems="center" justifyContent={"center"} sx={{ p: 5 }}>
-                <Grid item xs={12} md={5}>
-                    <Typography variant="h4" component="h1" gutterBottom>
+        <Container
+            id="contact"
+            component="section"
+            maxWidth="lg"
+            sx={(theme) => ({
+                p: { xs: 4, md: 6 },
+                my: { xs: 4, md: 6 },
+                bgcolor: theme.palette.background.default,
+                borderRadius: theme.shape.borderRadius * 2,
+                boxShadow: theme.shadows[2],
+            })}
+        >
+            <Grid container spacing={4} justifyContent="center" alignItems="center">
+                <Grid item xs={12} md={6}>
+                    <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 700 }}>
                         Contact
                     </Typography>
-                    <Typography variant='p'>
-                        E-mail at <a href="mailto:daveymason@outlook.com">daveymason@outlook.com</a><br/>
-                        Or click <a href="#" onClick={handleContactClick}>here</a> to use the contact form (opens your email client).
+                    <Typography variant="body1" paragraph>
+                        Need assistance or have questions? Reach out to us via email.
                     </Typography>
+                    <Button variant="contained" color="primary" onClick={handleContactClick} sx={{ mt: 2 }}>
+                        Email Us
+                    </Button>
                 </Grid>
-                <Grid item xs={5} />
             </Grid>
         </Container>
     );

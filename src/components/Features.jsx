@@ -9,76 +9,54 @@ import featuresImage from "../assets/featuresImage.png";
 
 function Features() {
   return (
-    <Container className="features" maxWidth="xl" id="features">
-      <Grid container spacing={2} alignItems="center" justifyContent={"center"}>
+    <Container
+      id="features"
+      component="section"
+      maxWidth="lg"
+    >
+      <Grid container spacing={4} alignItems="center" justifyContent="center">
         <Grid item xs={12} md={5}>
-          <Box sx={{ textAlign: "left" }}>
-            <Typography variant="h4" component="h2" gutterBottom>
-              Features
-            </Typography>
-            <Card className="feature-card" sx={{ mb: 2, p:2 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <ChatIcon fontSize="medium" sx={{ mr: 1 }} />
-                <Typography variant="h6" component="h3">
-                  Chat
+          <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 3, fontWeight: 700 }}>
+            Features
+          </Typography>
+          <Box>
+            {[
+              { icon: <ChatIcon />, label: 'Chat', desc: 'Our chatbot is trained on crisis management data to provide support 24/7.' },
+              { icon: <BookIcon />, label: 'Ledger', desc: 'Keep track of your mood and activities to better understand your mental health.' },
+              { icon: <SpaIcon />, label: 'Mindfulness', desc: 'Access various exercises designed to help you relax and recharge.' },
+              { icon: <SupportAgentIcon />, label: 'Expert', desc: 'Get advice from mental health professionals on various topics.' },
+              { icon: <PeopleIcon />, label: 'Community', desc: 'Read stories shared by our community, fostering connection and support.' },
+            ].map((item) => (
+              <Card
+                key={item.label}
+                elevation={1}
+                sx={{
+                  p: 2,
+                  mb: 3,
+                  borderRadius: 2,
+                  boxShadow: (theme) => theme.shadows[1],
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                  {React.cloneElement(item.icon, { fontSize: 'medium', sx: { mr: 1, color: (theme) => theme.palette.primary.main } })}
+                  <Typography variant="h6" component="h3">
+                    {item.label}
+                  </Typography>
+                </Box>
+                <Typography variant="body2" component="p">
+                  {item.desc}
                 </Typography>
-              </Box>
-              <Typography variant="body2" component="p">
-                Our chatbot is trained on crisis management data to provide support 24/7.
-              </Typography>
-            </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <BookIcon fontSize="medium" sx={{ mr: 1 }} />
-                <Typography variant="h6" component="h3">
-                  Ledger
-                </Typography>
-              </Box>
-              <Typography variant="body2" component="p">
-                Keep track of your mood and activities to better understand your mental health.
-              </Typography>
-            </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <SpaIcon fontSize="medium" sx={{ mr: 1 }} />
-                <Typography variant="h6" component="h3">
-                  Mindfulness
-                </Typography>
-              </Box>
-              <Typography variant="body2" component="p">
-                Access various exercises designed to help you relax and recharge.
-              </Typography>
-            </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <SupportAgentIcon fontSize="medium" sx={{ mr: 1 }} />
-                <Typography variant="h6" component="h3">
-                  Expert
-                </Typography>
-              </Box>
-              <Typography variant="body2" component="p">
-                Get advice from mental health professionals on various topics.
-              </Typography>
-            </Card>
-            <Card className="feature-card" sx={{ mb: 2, p: 2 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <PeopleIcon fontSize="medium" sx={{ mr: 1 }} />
-                <Typography variant="h6" component="h3">
-                  Community
-                </Typography>
-              </Box>
-              <Typography variant="body2" component="p">
-                Read stories shared by our community, fostering connection and support.
-              </Typography>
-            </Card>
+              </Card>
+            ))}
           </Box>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Box sx={{ textAlign: "center" }}>
-            <img
+          <Box sx={{ textAlign: 'center' }}>
+            <Box
+              component="img"
               src={featuresImage}
               alt="Features"
-              style={{ width: "100%", maxWidth: "200px", height: "auto" }}
+              sx={(theme) => ({ width: '100%', maxWidth: 240, borderRadius: theme.shape.borderRadius, boxShadow: theme.shadows[2] })}
             />
           </Box>
         </Grid>
